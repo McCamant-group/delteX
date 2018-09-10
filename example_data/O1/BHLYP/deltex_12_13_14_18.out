@@ -1,0 +1,15 @@
+Ground state equilibrium geometry 
+Dihedral 12_13_14_18 = 179.331317881 degrees 
+Angle 12_13_14 = 59.1163996739 degrees 
+Angle 13_14_18 = 59.8143682859 degrees 
+Bond 12_13 = 1.42869533913 Angstroms 
+Bond 13_14 = 1.34025549317 Angstroms 
+Bond14_18 = 1.45070763787 Angstroms 
+
+Excited State geometry 
+ES Dihedral 12_13_14_18 = 179.21030796 degrees 
+ES Angle 12_13_14 = 56.6754341656 degrees 
+ES Angle 13_14_18 = 56.275447656 degrees 
+ES Bond 12_13 = 1.39113481506 Angstroms 
+ES Bond 13_14 = 1.41602751484 Angstroms 
+ES Bond 14_18 = 1.45141680675 Angstroms 
