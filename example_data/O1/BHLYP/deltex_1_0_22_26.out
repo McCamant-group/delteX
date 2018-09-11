@@ -1,15 +1,15 @@
 Ground state equilibrium geometry 
-Dihedral 1_0_22_26 = 113.587997594 degrees 
-Angle 1_0_22 = 59.3671287224 degrees 
-Angle 0_22_26 = 59.7353223187 degrees 
-Bond 1_0 = 1.40073504385 Angstroms 
-Bond 0_22 = 1.47968595286 Angstroms 
-Bond22_26 = 1.39066278897 Angstroms 
+Dihedral 1_0_22_26 = 113.5879975935206 degrees 
+Angle 1_0_22 = 59.36712872242893 degrees 
+Angle 0_22_26 = 59.73532231869316 degrees 
+Bond 1_0 = 1.4007350438513901 Angstroms 
+Bond 0_22 = 1.4796859528556787 Angstroms 
+Bond22_26 = 1.3906627889745948 Angstroms 
 
 Excited State geometry 
-ES Dihedral 1_0_22_26 = 149.966017005 degrees 
-ES Angle 1_0_22 = 53.58615538 degrees 
-ES Angle 0_22_26 = 62.9471323508 degrees 
-ES Bond 1_0 = 1.5450797367 Angstroms 
-ES Bond 0_22 = 1.44452026557 Angstroms 
-ES Bond 22_26 = 1.70054627925 Angstroms 
+ES Dihedral 1_0_22_26 = 149.96601700468415 degrees 
+ES Angle 1_0_22 = 53.58615537997837 degrees 
+ES Angle 0_22_26 = 62.9471323508073 degrees 
+ES Bond 1_0 = 1.545079736698676 Angstroms 
+ES Bond 0_22 = 1.4445202655732046 Angstroms 
+ES Bond 22_26 = 1.7005462792468569 Angstroms 
