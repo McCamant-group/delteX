@@ -28,6 +28,11 @@ def main():
 	equil_bond23 = w.internal_array(xyz,ax,bx,cx,dx,N,"bond23")
 	equil_bond34 = w.internal_array(xyz,ax,bx,cx,dx,N,"bond34")
 
+	equil_dihedMat = w.n_m_CN2IN_dihed(norm_modes+xyz,ax,bx,cx,dx,N)-equil_dihed
+	for i in range(len(equil_dihedMat)):
+		if equil_dihedMat[i] == -1.0*equil_dihed:
+			equil_dihedMat[i] += equil_dihed
+
 	## Compute excited state shift in xyz ##
 	es_struc = w.delta2xyzESgeom(norm_modes,shifts_dnc,N)
 	
@@ -46,6 +51,10 @@ def main():
 	es_bond34 = w.internal_array(es_xyz,ax,bx,cx,dx,N,"bond34")
 
 	dihedral1234 = w.dihed_shifts_2(shifts_dnc,norm_modes,ax,bx,cx,dx,N,xyz,equil_dihed)
+	for i in range(len(dihedral1234)):
+		if dihedral1234[i] == -1.0*equil_dihed:
+			dihedral1234[i] += equil_dihed
+			
 	angle123 = w.angle_shifts(shifts_dnc,norm_modes,ax,bx,cx,dx,N,xyz,equil_angle123,"angle123")
 	angle234 = w.angle_shifts(shifts_dnc,norm_modes,ax,bx,cx,dx,N,xyz,equil_angle234,"angle234")
 	bond12 = w.bond_shifts_2(shifts_dnc,norm_modes,ax,bx,cx,dx,N,xyz,equil_bond12,"bond12")
@@ -59,6 +68,7 @@ def main():
 	coord12 = str(ax)+"_"+str(bx)
 	coord23 = str(bx)+"_"+str(cx)
 	coord34 = str(cx)+"_"+str(dx)
+	np.savetxt("dihedral_"+coord1234+"_GSnm.dat",equil_dihedMat)
 	np.savetxt("dihedral_"+coord1234+"_nm.dat",dihedral1234)
 	np.savetxt("angle_"+coord123+"_nm.dat",angle123)
 	np.savetxt("angle_"+coord234+"_nm.dat",angle234)
