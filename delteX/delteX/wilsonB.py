@@ -83,7 +83,7 @@ def bond34(coords):
 
 # Form matrix elements of coordinates #
 def internal_matrix(matrix,ax,bx,cx,dx,N,internal):
-
+	#Fucked
 	matrix_X = np.zeros((3*N,4,3)) 
 	matrix_int = np.zeros(3*N) 
 	ax=ax*3
@@ -140,6 +140,7 @@ def internal_matrix(matrix,ax,bx,cx,dx,N,internal):
 
 # form array elements of coordinates #
 def internal_array(array,ax,bx,cx,dx,N,internal):
+	# works
 	array_X = np.zeros((4,3))
 	ax=ax*3
 	ay=ax+1
@@ -178,7 +179,7 @@ def internal_array(array,ax,bx,cx,dx,N,internal):
 			array_X[2,1] = array[i,0]
 		if i == dz:
 			array_X[3,2] = array[i,0]
-	if internal == "dihedral":
+	if internal == "dihedral1234":
 		array_int = B_dihedral(array_X)
 	elif internal == "angle123":
 		array_int = phi(e12(array_X),e23(array_X))
@@ -192,38 +193,19 @@ def internal_array(array,ax,bx,cx,dx,N,internal):
 		array_int = np.sqrt(bond34(array_X)[0]**2+bond34(array_X)[1]**2+bond34(array_X)[2]**2)
 	return array_int
 
-
 # Convert cartesian/normal displacement matrix to internal/normal
-def n_m_CN2IN_dihed(n_m,ax,bx,cx,dx,N):	
-	return internal_matrix(n_m,ax,bx,cx,dx,N,"dihedral") #matrix
-
-def n_m_CN2IN_angle(n_m,ax,bx,cx,dx,N,angle):	
-	return internal_matrix(n_m,ax,bx,cx,dx,N,angle)
-
-def n_m_CN2IN_bond(n_m,ax,bx,cx,dx,N,bond):
-	return internal_matrix(n_m,ax,bx,cx,dx,N,bond)
 
 def delta2xyzESgeom(n_m,shifts_dnc,N):
 	return 5.8065*np.dot(n_m,freqs(N)*shifts_dnc)
 
-def dihed_shifts_2(shifts_dnc,n_m,ax,bx,cx,dx,N,xyz,equil_dihed):
-	trans = np.transpose(np.matrix(5.8065*np.multiply(n_m,np.transpose(freqs(N)*shifts_dnc))))
-	return n_m_CN2IN_dihed(np.transpose(trans)+xyz,ax,bx,cx,dx,N)-equil_dihed
+def n_m_CN2IN(n_m,ax,bx,cx,dx,N,int_coord):
+	n_mB = np.zeros((3*N))
+	for i in range(3*N):
+		n_mB[i] = internal_array(n_m[:,i],ax,bx,cx,dx,N,int_coord)
+	return n_mB
 
-def bond_shifts_2(shifts_dnc,n_m,ax,bx,cx,dx,N,xyz,equil_bond,bond):
-	trans = np.matrix(5.8065*np.multiply(n_m,np.transpose(freqs(N)*shifts_dnc)))
-	return n_m_CN2IN_bond(trans+xyz,ax,bx,cx,dx,N,bond)#-equil_bond
-
-
-def dihed_shifts(shifts_dnc,n_m,ax,bx,cx,dx,N,xyz,equil_dihed):
-	return 5.8065*np.transpose(n_m_CN2IN_dihed((n_m+xyz),ax,bx,cx,dx,N))*freqs(N)*shifts_dnc
-
-def angle_shifts(shifts_dnc,n_m,ax,bx,cx,dx,N,xyz,equil_angle,angle):
-	return 5.8065*np.transpose(n_m_CN2IN_angle((n_m+xyz),ax,bx,cx,dx,N,angle))*freqs(N)*shifts_dnc
-
-def bond_shifts(shifts_dnc,n_m,ax,bx,cx,dx,N,xyz,equil_bond,bond):
-	return 5.8065*np.transpose(n_m_CN2IN_bond((n_m+xyz),ax,bx,cx,dx,N,bond)-equil_bond)*freqs(N)*shifts_dnc
-
+def int_shifts(shifts_dnc,n_m,ax,bx,cx,dx,N,xyz,equil_coord,int_coord):
+	return 5.8065*(np.multiply(n_m_CN2IN((n_m+xyz),ax,bx,cx,dx,N,int_coord)-equil_coord,freqs(N)*shifts_dnc))
 
 	
 
